@@ -23,6 +23,7 @@ Suggested order of patches application:
     after both.
 4. `st-ligatures-scrollback-20251007-0.9.3.diff` - This must come AFTER
     scrollback. It should be compatible with scrollback options above.
+    `sudo pacman -S harfbuzz` a requirement.
 5. Color/brightness ptches (these should come afte functionsl):
     1. `st-bold-is-not-bright-20190127-3be4cf1.diff` - nicer visual.
     2. `st-no_bold_colors-20170623-b331da5.diff` - prerequisite for solarized.
