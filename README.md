@@ -14,10 +14,35 @@ List of few patches that I applied. Principle was to still keep it minimal.
 - [ligatures](https://st.suckless.org/patches/ligatures/)
 - [solarized](https://st.suckless.org/patches/solarized/)
 
-## Few `st` keybindings
+Suggested order of patches application:
+
+1. `st-scrollback-0.9.2.diff` - fundamental patch for scrolling.
+2. `st-scrollback-mouse-0.9.2.diff` - applies cleanly only after the base 
+    scrollback.
+3. `st-scrollback-mouse-altscreen-20220127-2c5edf2.diff` - must be applied
+    after both.
+4. `st-ligatures-scrollback-20251007-0.9.3.diff` - This must come AFTER
+    scrollback. It should be compatible with scrollback options above.
+5. Color/brightness ptches (these should come afte functionsl):
+    1. `st-bold-is-not-bright-20190127-3be4cf1.diff` - nicer visual.
+    2. `st-no_bold_colors-20170623-b331da5.diff` - prerequisite for solarized.
+    3. `st-solarized-both-20220617-baa9357.diff` - adding both dark/light,
+       change with F6.
+8. `st-clipboard-0.8.3.diff` - touches x.c and sometimes config.def.h.
+
+
+## A few `st` keybindings
 
 Default:
-- Ctrl + Shift
+- `Ctrl + Shift + {->, <-}` zoom in/out.
+- `Ctrl + Shift + Home` zoom reset.
+- `Shift + Print` - printscreen.
+- `Ctrl + Shift + c` - copy to clipboard.
+- `Ctrl + Shift + v` - paste from clipboard.
+- `Ctrl + Shift + y` - paste from PRIMARY?  (selpaste).
+- `Shift + Insert` - paste from PRIMARY?  (selpaste).
+- `middle mouse button` - paste from PRIMARY (selpaste).
+
 Custom/added:
 - `Shift + {PageUp, PageDown}` - scrolling through the terminal.
 
@@ -55,6 +80,31 @@ git add .
 git commit -m "Apply patch_name."
 ```
 
+Patches usually touch `config.def.h` and not `config.h`. One of the ways to 
+solve this issue is to backup `config.h`:
+```bash
+cp config.h config.h.backup`
+```
+
+Remove `config.h`:
+```bash
+rm config.h
+```
+
+Apply patches as describe above and run that now affect `config.def.h` and run:
+```bash
+make
+```
+
+Reapply your custom settings.
+Open your backup:
+```bash
+diff -u config.h.badckup config.h
+```
+Then merge manually (only the parts you changed!).
+
+[!NOTE] Alternative is to move `config.h` into `config.def.h` and remove
+`config.h`, then apply patches.
 
 ### Update `master` branch (new version of `st`)
 
