@@ -28,6 +28,7 @@ Suggested order of patches application:
 5. Color/brightness patches (these should come afte functionsl):
     1. `st-bold-is-not-bright-20190127-3be4cf1.diff` - nicer visual.
     2. `st-no_bold_colors-20170623-b331da5.diff` - prerequisite for solarized.
+        not required?
     3. `st-solarized-both-20220617-baa9357.diff` - adding both dark/light,
        change with F6.
 8. `st-clipboard-0.8.3.diff` - touches x.c and sometimes config.def.h.
